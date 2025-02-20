@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
-public class DepartureAfterTargetPredicate implements FlightPredicate {
+public class DepartureAfterTargetPredicate extends FlightPredicate {
     private final LocalDateTime targetDateTime;
 
     public DepartureAfterTargetPredicate(LocalDateTime targetDateTime) {
-        Objects.requireNonNull(targetDateTime, "Target date time can not be null");
+        Objects.requireNonNull(targetDateTime, "Target datetime can not be null");
         this.targetDateTime = targetDateTime;
     }
 
@@ -21,6 +21,6 @@ public class DepartureAfterTargetPredicate implements FlightPredicate {
         Optional<LocalDateTime> minDepartureDateTime = flight.getSegments().stream()
                 .map(Segment::getDepartureDate)
                 .min(LocalDateTime::compareTo);
-        return minDepartureDateTime.orElse(LocalDateTime.MIN).isBefore(targetDateTime);
+        return minDepartureDateTime.orElse(LocalDateTime.MIN).isAfter(targetDateTime);
     }
 }

@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class GroundTimeExceedsTargetPredicate implements FlightPredicate {
+public class GroundTimeExceedsTargetPredicate extends FlightPredicate {
     private final long targetMinutes;
 
     public GroundTimeExceedsTargetPredicate(long targetMinutes) {

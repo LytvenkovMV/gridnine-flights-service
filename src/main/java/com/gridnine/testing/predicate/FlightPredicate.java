@@ -4,5 +4,5 @@ import com.gridnine.testing.model.Flight;
 
 import java.util.function.Predicate;
 
-public interface FlightPredicate extends Predicate<Flight> {
+public abstract class FlightPredicate implements Predicate<Flight> {
 }

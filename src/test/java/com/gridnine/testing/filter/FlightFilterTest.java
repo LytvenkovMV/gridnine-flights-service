@@ -21,19 +21,29 @@ class FlightFilterTest {
     }
 
     @Test
-    void when_doFilter_with_always_true_predicate_then_return_all_flights() {
-        FlightPredicate predicate = (f) -> true;
+    void when_doFilter_while_predicate_returns_always_true_then_return_all_flights() {
+        FlightPredicate predicate = new FlightPredicate() {
+            @Override
+            public boolean test(Flight flight) {
+                return true;
+            }
+        };
 
-        List<Flight> result = filter.doFilter(predicate).getResult();
+        List<Flight> result = filter.doFilter(predicate);
 
         Assertions.assertEquals(flights, result);
     }
 
     @Test
-    void when_doFilter_with_always_false_predicate_then_return_empty_list() {
-        FlightPredicate predicate = (f) -> false;
+    void when_doFilter_while_predicate_returns_always_false_then_return_empty_list() {
+        FlightPredicate predicate = new FlightPredicate() {
+            @Override
+            public boolean test(Flight flight) {
+                return false;
+            }
+        };
 
-        List<Flight> result = filter.doFilter(predicate).getResult();
+        List<Flight> result = filter.doFilter(predicate);
 
         Assertions.assertTrue(result.isEmpty());
     }

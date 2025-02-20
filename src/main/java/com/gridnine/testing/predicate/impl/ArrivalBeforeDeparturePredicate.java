@@ -4,7 +4,7 @@ import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
 import com.gridnine.testing.predicate.FlightPredicate;
 
-public class ArrivalBeforeDeparturePredicate implements FlightPredicate {
+public class ArrivalBeforeDeparturePredicate extends FlightPredicate {
 
     @Override
     public boolean test(Flight flight) {
