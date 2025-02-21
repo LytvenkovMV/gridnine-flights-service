@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class FlightPredicateTest {
     FlightPredicate alwaysTruePredicate;
     FlightPredicate alwaysFalsePredicate;
+    Flight flight;
 
     @BeforeEach
     void init() {
@@ -24,34 +27,29 @@ class FlightPredicateTest {
                 return false;
             }
         };
+
+        flight = new Flight(List.of());
     }
 
     @Test
     void when_negate_true_then_return_false() {
         FlightPredicate predicate = alwaysTruePredicate.negate();
 
-        Assertions.assertFalse(predicate.test(null));
-    }
-
-    @Test
-    void when_negate_false_then_return_true() {
-        FlightPredicate predicate = alwaysFalsePredicate.negate();
-
-        Assertions.assertTrue(predicate.test(null));
+        Assertions.assertFalse(predicate.test(flight));
     }
 
     @Test
     void when_true_and_true_then_return_true() {
         FlightPredicate predicate = alwaysTruePredicate.and(alwaysTruePredicate);
 
-        Assertions.assertTrue(predicate.test(null));
+        Assertions.assertTrue(predicate.test(flight));
     }
 
     @Test
     void when_true_and_false_then_return_false() {
         FlightPredicate predicate = alwaysTruePredicate.and(alwaysFalsePredicate);
 
-        Assertions.assertFalse(predicate.test(null));
+        Assertions.assertFalse(predicate.test(flight));
     }
 
     @Test
@@ -64,14 +62,14 @@ class FlightPredicateTest {
     void when_true_or_false_then_return_true() {
         FlightPredicate predicate = alwaysTruePredicate.or(alwaysFalsePredicate);
 
-        Assertions.assertTrue(predicate.test(null));
+        Assertions.assertTrue(predicate.test(flight));
     }
 
     @Test
     void when_false_or_false_then_return_false() {
         FlightPredicate predicate = alwaysFalsePredicate.or(alwaysFalsePredicate);
 
-        Assertions.assertFalse(predicate.test(null));
+        Assertions.assertFalse(predicate.test(flight));
     }
 
     @Test

@@ -12,6 +12,7 @@ public class FlightFilter {
 
     public FlightFilter(List<Flight> flights) {
         Objects.requireNonNull(flights, "Flight list can not be null");
+        if(flights.contains(null)) throw new NullPointerException("Flight list contains null element");
 
         this.flights = flights;
     }
