@@ -16,7 +16,7 @@ public abstract class AbstractPredicate<T> {
     }
 
     public AbstractPredicate<T> and(AbstractPredicate<T> other) {
-        Objects.requireNonNull(other, "Predicate can not be null");
+        Objects.requireNonNull(other, "Predicate cannot be null");
 
         return new AbstractPredicate<>() {
             @Override
@@ -27,7 +27,7 @@ public abstract class AbstractPredicate<T> {
     }
 
     public AbstractPredicate<T> or(AbstractPredicate<T> other) {
-        Objects.requireNonNull(other, "Predicate can not be null");
+        Objects.requireNonNull(other, "Predicate cannot be null");
 
         return new AbstractPredicate<>() {
             @Override

@@ -12,7 +12,7 @@ public class DepartureAfterPredicate extends AbstractPredicate<Flight> {
     private final LocalDateTime targetDateTime;
 
     public DepartureAfterPredicate(LocalDateTime targetDateTime) {
-        Objects.requireNonNull(targetDateTime, "Target datetime can not be null");
+        Objects.requireNonNull(targetDateTime, "Target datetime cannot be null");
         this.targetDateTime = targetDateTime;
     }
 

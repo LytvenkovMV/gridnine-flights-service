@@ -13,6 +13,8 @@ public class CustomPredicate extends AbstractPredicate<Flight> {
 
     // Создайте конструктор для всех полей класса
     public CustomPredicate(long targetNumber, LocalDateTime targetDateTime) {
+        // Сделайте проверку параметров
+        // Проверка параметров......
         this.targetNumber = targetNumber;
         this.targetDateTime = targetDateTime;
     }

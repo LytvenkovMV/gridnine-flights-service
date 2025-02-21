@@ -4,6 +4,7 @@
 
 - [Введение](#введение)
 - [Использование фильтра](#использование-фильтра)
+- [Список предикатов]()
 - [Создание нового предиката](#создание-нового-предиката)
 
 ### Введение
@@ -46,6 +47,28 @@ Filter<Flight> filter = new FlightFilter(flights);
 List<Flight> filtered = filter.doFilter(combinedPredicate);
 ```
 
+### Список предикатов
+
+- **ArrivalBeforeDeparturePredicate:** возвращает перелеты у которых время отправления позже, чем время
+прибытия.  
+*Параметры конструктора:* нет
+- DepartureAfterPredicate: возвращает перелеты у которых время отправления позже
+чем заданное время. Параметры конструктора: targetDateTime:LocalDateTime - время для сравнения
+- **DepartureBetweenPredicate:** возвращает перелеты у которых время отправления в заданном
+    диапазоне.  
+*Параметры конструктора:* startDateTime:LocalDateTime - начало диапазона,
+  endDateTime:LocalDateTime - конец диапазона
+- **FlightDurationExceedsPredicate:** возвращает перелеты у которых общее время в пути
+превышает заданное.  
+*Параметры конструктора:* targetMinutes:long - заданное время в минутах
+- **GroundTimeExceedsPredicate:** возвращает перелеты у которых общее время, проведенное на
+земле превышает заданное.  
+*Параметры конструктора:* targetMinutes:long - заданное время в минутах
+- **SegmentNumberGreaterOrEqualsPredicate:** возвращает перелеты у которых количество промежуточных
+рейсов больше или равно заданному.  
+*Параметры конструктора:* targetSegmentNumber:long - заданное
+количество промежуточных рейсов
+
 ### Создание нового предиката
 
 - создайте класс-наследник от абстрактного класса AbstractPredicate из пакета com.gridnine.testing.predicate
@@ -70,6 +93,8 @@ public class CustomPredicate extends AbstractPredicate<Flight> {
 
     // Создайте конструктор для всех полей класса
     public CustomPredicate(long targetNumber, LocalDateTime targetDateTime) {
+        // Сделайте проверку параметров
+        // Проверка параметров......
         this.targetNumber = targetNumber;
         this.targetDateTime = targetDateTime;
     }

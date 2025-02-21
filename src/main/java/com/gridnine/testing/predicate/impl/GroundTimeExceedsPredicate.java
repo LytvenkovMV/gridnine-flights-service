@@ -12,6 +12,7 @@ public class GroundTimeExceedsPredicate extends AbstractPredicate<Flight> {
     private final long targetMinutes;
 
     public GroundTimeExceedsPredicate(long targetMinutes) {
+
         this.targetMinutes = targetMinutes;
     }
 

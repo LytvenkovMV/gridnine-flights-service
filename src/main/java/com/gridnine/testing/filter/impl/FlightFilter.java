@@ -12,7 +12,7 @@ public class FlightFilter implements Filter<Flight> {
     private final List<Flight> flights;
 
     public FlightFilter(List<Flight> flights) {
-        Objects.requireNonNull(flights, "Flight list can not be null");
+        Objects.requireNonNull(flights, "Flight list cannot be null");
         if (flights.contains(null)) throw new NullPointerException("Flight list contains null element");
 
         this.flights = flights;
@@ -20,7 +20,7 @@ public class FlightFilter implements Filter<Flight> {
 
     @Override
     public List<Flight> doFilter(AbstractPredicate<Flight> predicate) {
-        Objects.requireNonNull(predicate, "Predicate can not be null");
+        Objects.requireNonNull(predicate, "Predicate cannot be null");
 
         List<Flight> result = new ArrayList<>();
         for (Flight flight : flights) {
