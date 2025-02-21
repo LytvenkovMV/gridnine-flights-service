@@ -6,7 +6,7 @@ import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.FlightPredicate;
 import com.gridnine.testing.predicate.impl.ArrivalBeforeDeparturePredicate;
 import com.gridnine.testing.predicate.impl.DepartureAfterTargetPredicate;
-import com.gridnine.testing.predicate.impl.GroundTimeExceedsTargetPredicate;
+import com.gridnine.testing.predicate.impl.GroundTimeGreaterOrEqualsTargetPredicate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,21 +17,21 @@ public class Main {
 
         FlightFilter filter = new FlightFilter(flights);
 
+        System.out.println("Initial flight list:");
+        System.out.println(filter.getFlights());
+
         LocalDateTime targetDateTime = LocalDateTime.now();
         FlightPredicate predicate1 = new DepartureAfterTargetPredicate(targetDateTime);
-        System.out.println("Filter flights with departure after " + targetDateTime);
-        System.out.println("Initial list:  " + filter.getFlights());
-        System.out.println("Filtered list: " + filter.doFilter(predicate1));
+        System.out.println("Flights with departure after " + targetDateTime + ":");
+        System.out.println(filter.doFilter(predicate1));
 
-        System.out.println("Filter flights with arrival before departure");
         FlightPredicate predicate2 = new ArrivalBeforeDeparturePredicate();
-        System.out.println("Initial list:  " + filter.getFlights());
-        System.out.println("Filtered list: " + filter.doFilter(predicate2));
+        System.out.println("Flights with arrival before departure:");
+        System.out.println(filter.doFilter(predicate2));
 
         long targetGroundMinutes = 120;
-        FlightPredicate predicate3 = new GroundTimeExceedsTargetPredicate(targetGroundMinutes);
-        System.out.printf("Filter flights with ground time greater then %d minutes\n", targetGroundMinutes);
-        System.out.println("Initial list:  " + filter.getFlights());
-        System.out.println("Filtered list: " + filter.doFilter(predicate3));
+        FlightPredicate predicate3 = new GroundTimeGreaterOrEqualsTargetPredicate(targetGroundMinutes);
+        System.out.println("Flights with ground time greater then " + targetGroundMinutes + " minutes:");
+        System.out.println(filter.doFilter(predicate3));
     }
 }

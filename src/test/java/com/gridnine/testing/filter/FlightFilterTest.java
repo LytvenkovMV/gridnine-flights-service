@@ -21,7 +21,7 @@ class FlightFilterTest {
     }
 
     @Test
-    void when_doFilter_while_predicate_returns_always_true_then_return_all_flights() {
+    void when_predicate_returns_always_true_then_return_all_flights() {
         FlightPredicate predicate = new FlightPredicate() {
             @Override
             public boolean test(Flight flight) {
@@ -35,7 +35,7 @@ class FlightFilterTest {
     }
 
     @Test
-    void when_doFilter_while_predicate_returns_always_false_then_return_empty_list() {
+    void when_predicate_returns_always_false_then_return_empty_list() {
         FlightPredicate predicate = new FlightPredicate() {
             @Override
             public boolean test(Flight flight) {

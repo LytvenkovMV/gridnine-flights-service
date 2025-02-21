@@ -1,11 +1,11 @@
 package com.gridnine.testing.filter;
 
 import com.gridnine.testing.model.Flight;
+import com.gridnine.testing.predicate.FlightPredicate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
 
 public class FlightFilter {
     private final List<Flight> flights;
@@ -20,7 +20,7 @@ public class FlightFilter {
         return flights;
     }
 
-    public List<Flight> doFilter(Predicate<Flight> predicate) {
+    public List<Flight> doFilter(FlightPredicate predicate) {
         Objects.requireNonNull(predicate, "Predicate can not be null");
 
         List<Flight> result = new ArrayList<>();
@@ -28,7 +28,6 @@ public class FlightFilter {
             if (predicate.test(flight)) {
                 result.add(flight);
             }
-
         }
 
         return result;
