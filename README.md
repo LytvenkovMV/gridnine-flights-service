@@ -29,12 +29,12 @@
 // Создаем предикат, пропускающий только перелеты с датой и временем вылета
 // позже текущей даты
 LocalDateTime targetDateTime = LocalDateTime.now();
-AbstractPredicate<Flight> predicate1 = new DepartureAfterTargetPredicate(targetDateTime);
+AbstractPredicate<Flight> predicate1 = new DepartureAfterPredicate(targetDateTime);
 
 // Создаем предикат, пропускающий только те перелеты, в которых количество промежуточных
 // рейсов больше или равно 3
 long targetSegmentNumber = 3;
-AbstractPredicate<Flight> predicate2 = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+AbstractPredicate<Flight> predicate2 = new SegmentNumberGreaterOrEqualsPredicate(targetSegmentNumber);
 
 // Создаем комбинированый предикат, пропускающий только те перелеты, в которых дата и время
 // вылета позже текущей даты и количество промежуточных рейсов меньше 3
@@ -52,7 +52,7 @@ List<Flight> filtered = filter.doFilter(combinedPredicate);
 - **ArrivalBeforeDeparturePredicate:** возвращает перелеты у которых время отправления позже, чем время
 прибытия.  
 *Параметры конструктора:* нет
-- DepartureAfterPredicate: возвращает перелеты у которых время отправления позже
+- **DepartureAfterPredicate:** возвращает перелеты у которых время отправления позже
 чем заданное время. Параметры конструктора: targetDateTime:LocalDateTime - время для сравнения
 - **DepartureBetweenPredicate:** возвращает перелеты у которых время отправления в заданном
     диапазоне.  
