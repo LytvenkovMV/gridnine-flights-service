@@ -8,10 +8,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class GroundTimeGreaterOrEqualsTargetPredicate extends AbstractPredicate<Flight> {
+public class GroundTimeExceedsPredicate extends AbstractPredicate<Flight> {
     private final long targetMinutes;
 
-    public GroundTimeGreaterOrEqualsTargetPredicate(long targetMinutes) {
+    public GroundTimeExceedsPredicate(long targetMinutes) {
         this.targetMinutes = targetMinutes;
     }
 
@@ -27,6 +27,6 @@ public class GroundTimeGreaterOrEqualsTargetPredicate extends AbstractPredicate<
             groundMinutes += duration.toMinutes();
         }
 
-        return groundMinutes >= targetMinutes;
+        return groundMinutes > targetMinutes;
     }
 }

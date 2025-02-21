@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-class SegmentNumberGreaterOrEqualsThanTargetPredicateTest {
+class SegmentNumberGreaterOrEqualsPredicateTest {
     Flight flight;
 
     @BeforeEach
@@ -26,7 +26,7 @@ class SegmentNumberGreaterOrEqualsThanTargetPredicateTest {
     void when_actual_segment_number_greater_than_target_then_return_true() {
         long targetSegmentNumber = 1L;
 
-        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsPredicate(targetSegmentNumber);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -35,7 +35,7 @@ class SegmentNumberGreaterOrEqualsThanTargetPredicateTest {
     void when_actual_segment_number_equals_target_then_return_true() {
         long targetSegmentNumber = 2L;
 
-        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsPredicate(targetSegmentNumber);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -44,7 +44,7 @@ class SegmentNumberGreaterOrEqualsThanTargetPredicateTest {
     void when_actual_segment_number_less_than_target_then_return_false() {
         long targetSegmentNumber = 3L;
 
-        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsPredicate(targetSegmentNumber);
 
         Assertions.assertFalse(predicate.test(flight));
     }

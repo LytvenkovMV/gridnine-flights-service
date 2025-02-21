@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-class DepartureAfterTargetPredicateTest {
+class DepartureAfterPredicateTest {
     Flight flight;
     LocalDateTime departure1;
     LocalDateTime arrival1;
@@ -32,7 +32,7 @@ class DepartureAfterTargetPredicateTest {
     void when_departure_after_target_when_return_true() {
         LocalDateTime targetDateTime = departure1.minusMinutes(10);
 
-        AbstractPredicate<Flight> predicate = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new DepartureAfterPredicate(targetDateTime);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -41,7 +41,7 @@ class DepartureAfterTargetPredicateTest {
     void when_departure_before_target_when_return_false() {
         LocalDateTime targetDateTime = departure1.plusMinutes(10);
 
-        AbstractPredicate<Flight> predicate = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new DepartureAfterPredicate(targetDateTime);
 
         Assertions.assertFalse(predicate.test(flight));
     }
@@ -50,7 +50,7 @@ class DepartureAfterTargetPredicateTest {
     void when_departure_equals_target_when_return_false() {
         LocalDateTime targetDateTime = departure1;
 
-        AbstractPredicate<Flight> predicate = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new DepartureAfterPredicate(targetDateTime);
 
         Assertions.assertFalse(predicate.test(flight));
     }
@@ -59,7 +59,7 @@ class DepartureAfterTargetPredicateTest {
     void when_second_departure_after_target_when_return_false() {
         LocalDateTime targetDateTime = departure2.minusMinutes(10);
 
-        AbstractPredicate<Flight> predicate = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new DepartureAfterPredicate(targetDateTime);
 
         Assertions.assertFalse(predicate.test(flight));
     }

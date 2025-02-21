@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
-public class DepartureAfterTargetPredicate extends AbstractPredicate<Flight> {
+public class DepartureAfterPredicate extends AbstractPredicate<Flight> {
     private final LocalDateTime targetDateTime;
 
-    public DepartureAfterTargetPredicate(LocalDateTime targetDateTime) {
+    public DepartureAfterPredicate(LocalDateTime targetDateTime) {
         Objects.requireNonNull(targetDateTime, "Target datetime can not be null");
         this.targetDateTime = targetDateTime;
     }

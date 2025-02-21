@@ -5,9 +5,9 @@ import com.gridnine.testing.filter.impl.FlightFilter;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.AbstractPredicate;
 import com.gridnine.testing.predicate.impl.ArrivalBeforeDeparturePredicate;
-import com.gridnine.testing.predicate.impl.DepartureAfterTargetPredicate;
-import com.gridnine.testing.predicate.impl.GroundTimeGreaterOrEqualsTargetPredicate;
-import com.gridnine.testing.predicate.impl.SegmentNumberGreaterOrEqualsThanTargetPredicate;
+import com.gridnine.testing.predicate.impl.DepartureAfterPredicate;
+import com.gridnine.testing.predicate.impl.GroundTimeExceedsPredicate;
+import com.gridnine.testing.predicate.impl.SegmentNumberGreaterOrEqualsPredicate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,12 +29,12 @@ class FlightFilterUsageExampleTest {
         // Создаем предикат, пропускающий только перелеты с датой и временем вылета
         // позже текущей даты
         LocalDateTime targetDateTime = LocalDateTime.now();
-        AbstractPredicate<Flight> predicate1 = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate1 = new DepartureAfterPredicate(targetDateTime);
 
         // Создаем предикат, пропускающий только те перелеты, в которых количество промежуточных
         // рейсов больше или равно 3
         long targetSegmentNumber = 3;
-        AbstractPredicate<Flight> predicate2 = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate2 = new SegmentNumberGreaterOrEqualsPredicate(targetSegmentNumber);
 
         // Создаем комбинированый предикат, пропускающий только те перелеты, в которых дата и время
         // вылета позже текущей даты и количество промежуточных рейсов меньше 3
@@ -52,9 +52,9 @@ class FlightFilterUsageExampleTest {
 
     @Test
     void filter_usage_example_2() {
-        AbstractPredicate<Flight> predicate1 = new DepartureAfterTargetPredicate(LocalDateTime.MIN);
+        AbstractPredicate<Flight> predicate1 = new DepartureAfterPredicate(LocalDateTime.MIN);
         AbstractPredicate<Flight> predicate2 = new ArrivalBeforeDeparturePredicate();
-        AbstractPredicate<Flight> predicate3 = new GroundTimeGreaterOrEqualsTargetPredicate(120);
+        AbstractPredicate<Flight> predicate3 = new GroundTimeExceedsPredicate(120);
         AbstractPredicate<Flight> combinedPredicate = predicate1.and(predicate2).and(predicate3);
         Filter<Flight> filter = new FlightFilter(flights);
 
@@ -66,9 +66,9 @@ class FlightFilterUsageExampleTest {
 
     @Test
     void filter_usage_example_3() {
-        AbstractPredicate<Flight> predicate1 = new DepartureAfterTargetPredicate(LocalDateTime.MIN);
+        AbstractPredicate<Flight> predicate1 = new DepartureAfterPredicate(LocalDateTime.MIN);
         AbstractPredicate<Flight> predicate2 = new ArrivalBeforeDeparturePredicate();
-        AbstractPredicate<Flight> predicate3 = new GroundTimeGreaterOrEqualsTargetPredicate(120);
+        AbstractPredicate<Flight> predicate3 = new GroundTimeExceedsPredicate(120);
         AbstractPredicate<Flight> combinedPredicate = (predicate1.negate()).and(predicate2.negate()).and(predicate3.negate());
         Filter<Flight> filter = new FlightFilter(flights);
 

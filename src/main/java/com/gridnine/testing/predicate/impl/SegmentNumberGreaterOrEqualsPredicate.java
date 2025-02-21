@@ -3,10 +3,10 @@ package com.gridnine.testing.predicate.impl;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.AbstractPredicate;
 
-public class SegmentNumberGreaterOrEqualsThanTargetPredicate extends AbstractPredicate<Flight> {
+public class SegmentNumberGreaterOrEqualsPredicate extends AbstractPredicate<Flight> {
     private final long targetSegmentNumber;
 
-    public SegmentNumberGreaterOrEqualsThanTargetPredicate(long targetSegmentNumber) {
+    public SegmentNumberGreaterOrEqualsPredicate(long targetSegmentNumber) {
         this.targetSegmentNumber = targetSegmentNumber;
     }
 

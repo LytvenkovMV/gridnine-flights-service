@@ -6,8 +6,8 @@ import com.gridnine.testing.filter.impl.FlightFilter;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.AbstractPredicate;
 import com.gridnine.testing.predicate.impl.ArrivalBeforeDeparturePredicate;
-import com.gridnine.testing.predicate.impl.DepartureAfterTargetPredicate;
-import com.gridnine.testing.predicate.impl.GroundTimeGreaterOrEqualsTargetPredicate;
+import com.gridnine.testing.predicate.impl.DepartureAfterPredicate;
+import com.gridnine.testing.predicate.impl.GroundTimeExceedsPredicate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,7 +22,7 @@ public class Main {
         System.out.println(flights);
 
         LocalDateTime targetDateTime = LocalDateTime.now();
-        AbstractPredicate<Flight> predicate1 = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate1 = new DepartureAfterPredicate(targetDateTime);
         System.out.println("Flights with departure after " + targetDateTime + ":");
         System.out.println(filter.doFilter(predicate1));
 
@@ -31,7 +31,7 @@ public class Main {
         System.out.println(filter.doFilter(predicate2));
 
         long targetGroundMinutes = 120;
-        AbstractPredicate<Flight> predicate3 = new GroundTimeGreaterOrEqualsTargetPredicate(targetGroundMinutes);
+        AbstractPredicate<Flight> predicate3 = new GroundTimeExceedsPredicate(targetGroundMinutes);
         System.out.println("Flights with ground time greater then " + targetGroundMinutes + " minutes:");
         System.out.println(filter.doFilter(predicate3));
     }

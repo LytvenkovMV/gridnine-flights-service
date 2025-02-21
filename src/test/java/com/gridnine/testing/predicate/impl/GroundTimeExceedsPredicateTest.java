@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-class GroundTimeGreaterOrEqualsTargetPredicateTest {
+class GroundTimeExceedsPredicateTest {
     Flight flight;
     long groundMinutes;
 
@@ -30,7 +30,7 @@ class GroundTimeGreaterOrEqualsTargetPredicateTest {
     void when_ground_minutes_greater_than_target_then_return_true() {
         long targetMinutes = groundMinutes - 20;
 
-        AbstractPredicate<Flight> predicate = new GroundTimeGreaterOrEqualsTargetPredicate(targetMinutes);
+        AbstractPredicate<Flight> predicate = new GroundTimeExceedsPredicate(targetMinutes);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -39,16 +39,16 @@ class GroundTimeGreaterOrEqualsTargetPredicateTest {
     void when_ground_minutes_equals_target_then_return_true() {
         long targetMinutes = groundMinutes;
 
-        AbstractPredicate<Flight> predicate = new GroundTimeGreaterOrEqualsTargetPredicate(targetMinutes);
+        AbstractPredicate<Flight> predicate = new GroundTimeExceedsPredicate(targetMinutes);
 
-        Assertions.assertTrue(predicate.test(flight));
+        Assertions.assertFalse(predicate.test(flight));
     }
 
     @Test
     void when_ground_minutes_less_than_target_then_return_false() {
         long targetMinutes = groundMinutes + 20;
 
-        AbstractPredicate<Flight> predicate = new GroundTimeGreaterOrEqualsTargetPredicate(targetMinutes);
+        AbstractPredicate<Flight> predicate = new GroundTimeExceedsPredicate(targetMinutes);
 
         Assertions.assertFalse(predicate.test(flight));
     }
