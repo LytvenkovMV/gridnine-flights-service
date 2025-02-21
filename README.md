@@ -53,7 +53,8 @@ List<Flight> filtered = filter.doFilter(combinedPredicate);
 прибытия.  
 *Параметры конструктора:* нет
 - **DepartureAfterPredicate:** возвращает перелеты у которых время отправления позже
-чем заданное время. Параметры конструктора: targetDateTime:LocalDateTime - время для сравнения
+чем заданное время.  
+*Параметры конструктора:* targetDateTime:LocalDateTime - время для сравнения
 - **DepartureBetweenPredicate:** возвращает перелеты у которых время отправления в заданном
     диапазоне.  
 *Параметры конструктора:* startDateTime:LocalDateTime - начало диапазона,
