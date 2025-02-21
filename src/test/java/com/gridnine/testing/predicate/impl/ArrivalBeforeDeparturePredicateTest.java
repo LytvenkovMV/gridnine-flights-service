@@ -2,15 +2,12 @@ package com.gridnine.testing.predicate.impl;
 
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
-import com.gridnine.testing.predicate.FlightPredicate;
+import com.gridnine.testing.predicate.AbstractPredicate;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ArrivalBeforeDeparturePredicateTest {
 
@@ -24,7 +21,7 @@ class ArrivalBeforeDeparturePredicateTest {
         Segment segment2 = new Segment(departure2, arrival2);
         Flight flight = new Flight(List.of(segment1, segment2));
 
-        FlightPredicate predicate = new ArrivalBeforeDeparturePredicate();
+        AbstractPredicate<Flight> predicate = new ArrivalBeforeDeparturePredicate();
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -39,7 +36,7 @@ class ArrivalBeforeDeparturePredicateTest {
         Segment segment2 = new Segment(departure2, arrival2);
         Flight flight = new Flight(List.of(segment1, segment2));
 
-        FlightPredicate predicate = new ArrivalBeforeDeparturePredicate();
+        AbstractPredicate<Flight> predicate = new ArrivalBeforeDeparturePredicate();
 
         Assertions.assertFalse(predicate.test(flight));
     }
@@ -53,7 +50,7 @@ class ArrivalBeforeDeparturePredicateTest {
         Segment segment2 = new Segment(departure2, arrival2);
         Flight flight = new Flight(List.of(segment1, segment2));
 
-        FlightPredicate predicate = new ArrivalBeforeDeparturePredicate();
+        AbstractPredicate<Flight> predicate = new ArrivalBeforeDeparturePredicate();
 
         Assertions.assertFalse(predicate.test(flight));
     }

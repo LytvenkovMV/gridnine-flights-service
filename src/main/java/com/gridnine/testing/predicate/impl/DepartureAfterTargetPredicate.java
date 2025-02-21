@@ -2,13 +2,13 @@ package com.gridnine.testing.predicate.impl;
 
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
-import com.gridnine.testing.predicate.FlightPredicate;
+import com.gridnine.testing.predicate.AbstractPredicate;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
-public class DepartureAfterTargetPredicate extends FlightPredicate {
+public class DepartureAfterTargetPredicate extends AbstractPredicate<Flight> {
     private final LocalDateTime targetDateTime;
 
     public DepartureAfterTargetPredicate(LocalDateTime targetDateTime) {

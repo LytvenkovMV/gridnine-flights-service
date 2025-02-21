@@ -1,27 +1,25 @@
-package com.gridnine.testing.filter;
+package com.gridnine.testing.filter.impl;
 
+import com.gridnine.testing.filter.Filter;
 import com.gridnine.testing.model.Flight;
-import com.gridnine.testing.predicate.FlightPredicate;
+import com.gridnine.testing.predicate.AbstractPredicate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FlightFilter {
+public class FlightFilter implements Filter<Flight> {
     private final List<Flight> flights;
 
     public FlightFilter(List<Flight> flights) {
         Objects.requireNonNull(flights, "Flight list can not be null");
-        if(flights.contains(null)) throw new NullPointerException("Flight list contains null element");
+        if (flights.contains(null)) throw new NullPointerException("Flight list contains null element");
 
         this.flights = flights;
     }
 
-    public List<Flight> getFlights() {
-        return flights;
-    }
-
-    public List<Flight> doFilter(FlightPredicate predicate) {
+    @Override
+    public List<Flight> doFilter(AbstractPredicate<Flight> predicate) {
         Objects.requireNonNull(predicate, "Predicate can not be null");
 
         List<Flight> result = new ArrayList<>();

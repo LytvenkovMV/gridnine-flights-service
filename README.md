@@ -1,4 +1,4 @@
-## Gridnine Flights Filter Module
+## Gridnine Flights Filter
 
 ### Содержание
 
@@ -25,23 +25,22 @@
 #### Пример кода
 
 ```java     
-
 // Создаем предикат, пропускающий только перелеты с датой и временем вылета
 // позже текущей даты
 LocalDateTime targetDateTime = LocalDateTime.now();
-FlightPredicate predicate1 = new DepartureAfterTargetPredicate(targetDateTime);
+AbstractPredicate<Flight> predicate1 = new DepartureAfterTargetPredicate(targetDateTime);
 
 // Создаем предикат, пропускающий только те перелеты, в которых количество промежуточных
 // рейсов больше или равно 3
 long targetSegmentNumber = 3;
-FlightPredicate predicate2 = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+AbstractPredicate<Flight> predicate2 = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
 
 // Создаем комбинированый предикат, пропускающий только те перелеты, в которых дата и время
 // вылета позже текущей даты и количество промежуточных рейсов меньше 3
-FlightPredicate combinedPredicate = predicate1.and(predicate2.negate());
+AbstractPredicate<Flight> combinedPredicate = predicate1.and(predicate2.negate());
 
 // Создаем фильтр. Подаем в конструктор исходный массив перелетов
-FlightFilter filter = new FlightFilter(flights);
+Filter<Flight> filter = new FlightFilter(flights);
 
 // Вызываем метод doFilter(), подаем в него предикат и получаем отфильтрованный список
 List<Flight> filtered = filter.doFilter(combinedPredicate);
@@ -49,7 +48,7 @@ List<Flight> filtered = filter.doFilter(combinedPredicate);
 
 ### Создание нового предиката
 
-- создайте класс-наследник от абстрактного класса FlightPredicate из пакета com.gridnine.testing.predicate
+- создайте класс-наследник от абстрактного класса AbstractPredicate из пакета com.gridnine.testing.predicate
 - опрелелите в классе поля для значений, которые будут применяться в логике фильтрации
 - создайте конструктор с параметрами для всех полей класса
 - создайте геттеры, если необходимо
@@ -58,13 +57,12 @@ List<Flight> filtered = filter.doFilter(combinedPredicate);
 #### Пример кода
 
 ```java
-
 import com.gridnine.testing.model.Flight;
 
 import java.time.LocalDateTime;
 
 // Новый предикат с пользовательской логикой
-public class CustomPredicate extends FlightPredicate {
+public class CustomPredicate extends AbstractPredicate<Flight> {
 
     // Создайте поля, содержащие целевые значения
     private final long targetNumber;

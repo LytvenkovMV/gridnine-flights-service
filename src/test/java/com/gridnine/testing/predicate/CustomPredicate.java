@@ -5,7 +5,7 @@ import com.gridnine.testing.model.Flight;
 import java.time.LocalDateTime;
 
 // Новый предикат с пользовательской логикой
-public class CustomPredicate extends FlightPredicate {
+public class CustomPredicate extends AbstractPredicate<Flight> {
 
     // Создайте поля, содержащие целевые значения
     private final long targetNumber;

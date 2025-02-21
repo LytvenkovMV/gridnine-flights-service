@@ -2,7 +2,7 @@ package com.gridnine.testing.predicate.impl;
 
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
-import com.gridnine.testing.predicate.FlightPredicate;
+import com.gridnine.testing.predicate.AbstractPredicate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class DepartureAfterTargetPredicateTest {
     void when_departure_after_target_when_return_true() {
         LocalDateTime targetDateTime = departure1.minusMinutes(10);
 
-        FlightPredicate predicate = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new DepartureAfterTargetPredicate(targetDateTime);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -41,7 +41,7 @@ class DepartureAfterTargetPredicateTest {
     void when_departure_before_target_when_return_false() {
         LocalDateTime targetDateTime = departure1.plusMinutes(10);
 
-        FlightPredicate predicate = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new DepartureAfterTargetPredicate(targetDateTime);
 
         Assertions.assertFalse(predicate.test(flight));
     }
@@ -50,7 +50,7 @@ class DepartureAfterTargetPredicateTest {
     void when_departure_equals_target_when_return_false() {
         LocalDateTime targetDateTime = departure1;
 
-        FlightPredicate predicate = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new DepartureAfterTargetPredicate(targetDateTime);
 
         Assertions.assertFalse(predicate.test(flight));
     }
@@ -59,7 +59,7 @@ class DepartureAfterTargetPredicateTest {
     void when_second_departure_after_target_when_return_false() {
         LocalDateTime targetDateTime = departure2.minusMinutes(10);
 
-        FlightPredicate predicate = new DepartureAfterTargetPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new DepartureAfterTargetPredicate(targetDateTime);
 
         Assertions.assertFalse(predicate.test(flight));
     }

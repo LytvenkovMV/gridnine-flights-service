@@ -2,13 +2,13 @@ package com.gridnine.testing.predicate.impl;
 
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
-import com.gridnine.testing.predicate.FlightPredicate;
+import com.gridnine.testing.predicate.AbstractPredicate;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class GroundTimeGreaterOrEqualsTargetPredicate extends FlightPredicate {
+public class GroundTimeGreaterOrEqualsTargetPredicate extends AbstractPredicate<Flight> {
     private final long targetMinutes;
 
     public GroundTimeGreaterOrEqualsTargetPredicate(long targetMinutes) {

@@ -7,21 +7,21 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class FlightPredicateTest {
-    FlightPredicate alwaysTruePredicate;
-    FlightPredicate alwaysFalsePredicate;
+class AbstractPredicateTest {
+    AbstractPredicate<Flight> alwaysTruePredicate;
+    AbstractPredicate<Flight> alwaysFalsePredicate;
     Flight flight;
 
     @BeforeEach
     void init() {
-        alwaysTruePredicate = new FlightPredicate() {
+        alwaysTruePredicate = new AbstractPredicate<>() {
             @Override
             public boolean test(Flight f) {
                 return true;
             }
         };
 
-        alwaysFalsePredicate = new FlightPredicate() {
+        alwaysFalsePredicate = new AbstractPredicate<>() {
             @Override
             public boolean test(Flight f) {
                 return false;
@@ -33,21 +33,21 @@ class FlightPredicateTest {
 
     @Test
     void when_negate_true_then_return_false() {
-        FlightPredicate predicate = alwaysTruePredicate.negate();
+        AbstractPredicate<Flight> predicate = alwaysTruePredicate.negate();
 
         Assertions.assertFalse(predicate.test(flight));
     }
 
     @Test
     void when_true_and_true_then_return_true() {
-        FlightPredicate predicate = alwaysTruePredicate.and(alwaysTruePredicate);
+        AbstractPredicate<Flight> predicate = alwaysTruePredicate.and(alwaysTruePredicate);
 
         Assertions.assertTrue(predicate.test(flight));
     }
 
     @Test
     void when_true_and_false_then_return_false() {
-        FlightPredicate predicate = alwaysTruePredicate.and(alwaysFalsePredicate);
+        AbstractPredicate<Flight> predicate = alwaysTruePredicate.and(alwaysFalsePredicate);
 
         Assertions.assertFalse(predicate.test(flight));
     }
@@ -60,14 +60,14 @@ class FlightPredicateTest {
 
     @Test
     void when_true_or_false_then_return_true() {
-        FlightPredicate predicate = alwaysTruePredicate.or(alwaysFalsePredicate);
+        AbstractPredicate<Flight> predicate = alwaysTruePredicate.or(alwaysFalsePredicate);
 
         Assertions.assertTrue(predicate.test(flight));
     }
 
     @Test
     void when_false_or_false_then_return_false() {
-        FlightPredicate predicate = alwaysFalsePredicate.or(alwaysFalsePredicate);
+        AbstractPredicate<Flight> predicate = alwaysFalsePredicate.or(alwaysFalsePredicate);
 
         Assertions.assertFalse(predicate.test(flight));
     }

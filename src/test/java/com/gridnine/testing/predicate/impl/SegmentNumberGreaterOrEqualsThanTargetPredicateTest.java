@@ -2,15 +2,13 @@ package com.gridnine.testing.predicate.impl;
 
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
-import com.gridnine.testing.predicate.FlightPredicate;
+import com.gridnine.testing.predicate.AbstractPredicate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SegmentNumberGreaterOrEqualsThanTargetPredicateTest {
     Flight flight;
@@ -28,7 +26,7 @@ class SegmentNumberGreaterOrEqualsThanTargetPredicateTest {
     void when_actual_segment_number_greater_than_target_then_return_true() {
         long targetSegmentNumber = 1L;
 
-        FlightPredicate predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -37,7 +35,7 @@ class SegmentNumberGreaterOrEqualsThanTargetPredicateTest {
     void when_actual_segment_number_equals_target_then_return_true() {
         long targetSegmentNumber = 2L;
 
-        FlightPredicate predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -46,7 +44,7 @@ class SegmentNumberGreaterOrEqualsThanTargetPredicateTest {
     void when_actual_segment_number_less_than_target_then_return_false() {
         long targetSegmentNumber = 3L;
 
-        FlightPredicate predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsThanTargetPredicate(targetSegmentNumber);
 
         Assertions.assertFalse(predicate.test(flight));
     }
