@@ -30,7 +30,7 @@ class FlightFilterTest {
             }
         };
 
-        List<Flight> result = filter.doFilter(predicate);
+        List<Flight> result = filter.doFilter(predicate).get();
 
         Assertions.assertEquals(flights, result);
     }
@@ -44,7 +44,7 @@ class FlightFilterTest {
             }
         };
 
-        List<Flight> result = filter.doFilter(predicate);
+        List<Flight> result = filter.doFilter(predicate).get();
 
         Assertions.assertTrue(result.isEmpty());
     }
