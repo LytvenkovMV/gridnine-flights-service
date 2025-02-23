@@ -3,6 +3,7 @@ package com.gridnine.testing.predicate.impl;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
 import com.gridnine.testing.predicate.AbstractPredicate;
+import com.gridnine.testing.predicate.Operator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-class DepartureAfterPredicateTest {
+class ArrivalPredicateTest {
     Flight flight;
     LocalDateTime departure1;
     LocalDateTime arrival1;
@@ -29,37 +30,28 @@ class DepartureAfterPredicateTest {
     }
 
     @Test
-    void when_departure_after_target_when_return_true() {
-        LocalDateTime targetDateTime = departure1.minusMinutes(10);
+    void when_arrival_after_target_then_return_true() {
+        LocalDateTime targetDateTime = arrival2.minusMinutes(10);
 
-        AbstractPredicate<Flight> predicate = new DepartureAfterPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new ArrivalPredicate(Operator.GREATER_THAN, targetDateTime);
 
         Assertions.assertTrue(predicate.test(flight));
     }
 
     @Test
-    void when_departure_before_target_when_return_false() {
-        LocalDateTime targetDateTime = departure1.plusMinutes(10);
+    void when_arrival_before_target_then_return_false() {
+        LocalDateTime targetDateTime = arrival2.plusMinutes(10);
 
-        AbstractPredicate<Flight> predicate = new DepartureAfterPredicate(targetDateTime);
-
-        Assertions.assertFalse(predicate.test(flight));
-    }
-
-    @Test
-    void when_departure_equals_target_when_return_false() {
-        LocalDateTime targetDateTime = departure1;
-
-        AbstractPredicate<Flight> predicate = new DepartureAfterPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new ArrivalPredicate(Operator.GREATER_THAN, targetDateTime);
 
         Assertions.assertFalse(predicate.test(flight));
     }
 
     @Test
-    void when_second_departure_after_target_when_return_false() {
-        LocalDateTime targetDateTime = departure2.minusMinutes(10);
+    void when_arrival_equals_target_then_return_false() {
+        LocalDateTime targetDateTime = arrival2;
 
-        AbstractPredicate<Flight> predicate = new DepartureAfterPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate = new ArrivalPredicate(Operator.GREATER_THAN, targetDateTime);
 
         Assertions.assertFalse(predicate.test(flight));
     }

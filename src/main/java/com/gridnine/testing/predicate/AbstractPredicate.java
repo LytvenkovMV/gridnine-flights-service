@@ -1,5 +1,6 @@
 package com.gridnine.testing.predicate;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public abstract class AbstractPredicate<T> {
@@ -73,6 +74,26 @@ public abstract class AbstractPredicate<T> {
             }
             default -> {
                 return number1 == number2;
+            }
+        }
+    }
+
+    protected boolean compareDates(LocalDateTime dateTime1, LocalDateTime dateTime2, Operator operator) {
+        switch (operator) {
+            case LESS_THAN -> {
+                return dateTime1.isBefore(dateTime2);
+            }
+            case GREATER_THAN -> {
+                return dateTime1.isAfter(dateTime2);
+            }
+            case LESS_THAN_OR_EQUAL_TO -> {
+                return dateTime1.isBefore(dateTime2) || dateTime1.isEqual(dateTime2);
+            }
+            case GREATER_THAN_OR_EQUAL_TO -> {
+                return dateTime1.isAfter(dateTime2) || dateTime1.isEqual(dateTime2);
+            }
+            default -> {
+                return dateTime1.isEqual(dateTime2);
             }
         }
     }

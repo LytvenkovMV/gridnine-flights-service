@@ -6,7 +6,7 @@ import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.AbstractPredicate;
 import com.gridnine.testing.predicate.Operator;
 import com.gridnine.testing.predicate.impl.ArrivalBeforeDeparturePredicate;
-import com.gridnine.testing.predicate.impl.DepartureAfterPredicate;
+import com.gridnine.testing.predicate.impl.DeparturePredicate;
 import com.gridnine.testing.predicate.impl.GroundTimePredicate;
 
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public class Main {
         System.out.println(flights);
 
         LocalDateTime targetDateTime = LocalDateTime.now();
-        AbstractPredicate<Flight> predicate1 = new DepartureAfterPredicate(targetDateTime);
+        AbstractPredicate<Flight> predicate1 = new DeparturePredicate(Operator.GREATER_THAN, targetDateTime);
         System.out.println("Flights with departure after " + targetDateTime + ":");
         System.out.println(new FlightFilter(flights).doFilter(predicate1).get());
 
