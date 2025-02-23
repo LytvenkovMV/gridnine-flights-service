@@ -5,7 +5,6 @@ import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.AbstractPredicate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +25,7 @@ public class FlightFilter implements Filter<Flight> {
         Objects.requireNonNull(predicate, "Predicate cannot be null");
 
         for (int i = 0; i < flags.length; i++) {
-            if(!flags[i]) {
+            if (!flags[i]) {
                 if (!predicate.test(flights.get(i))) {
                     flags[i] = true;
                 }
@@ -36,11 +35,11 @@ public class FlightFilter implements Filter<Flight> {
     }
 
     @Override
-    public List<Flight> get() {
+    public List<Flight> getFiltered() {
         List<Flight> result = new ArrayList<>();
 
         for (int i = 0; i < flags.length; i++) {
-            if(!flags[i]) {
+            if (!flags[i]) {
                 result.add(flights.get(i));
             }
         }

@@ -41,7 +41,7 @@ class FlightFilterUsageExampleTest {
 
         // Создаем объект класса FlightFilter, вызываем метод doFilter() с комбинированным предикатом,
         // получаем отфильтрованный список
-        List<Flight> filtered = new FlightFilter(flights).doFilter(combinedPredicate).get();
+        List<Flight> filtered = new FlightFilter(flights).doFilter(combinedPredicate).getFiltered();
 
         System.out.println("Initial list:  " + flights);
         System.out.println("Filtered list: " + filtered);
@@ -61,7 +61,7 @@ class FlightFilterUsageExampleTest {
                 // Пропускаем только перелеты с количеством промежуточных рейсов меньше 3
                 .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber).negate())
                 // Получаем отфильтрованный список
-                .get();
+                .getFiltered();
 
         System.out.println("Initial list:  " + flights);
         System.out.println("Filtered list: " + filtered);
@@ -76,7 +76,7 @@ class FlightFilterUsageExampleTest {
         List<Flight> filtered = new FlightFilter(flights)
                 .doFilter(new DeparturePredicate(Operator.GREATER_THAN, targetDateTime))
                 .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber).negate())
-                .get();
+                .getFiltered();
 
         System.out.println("Initial list:  " + flights);
         System.out.println("Filtered list: " + filtered);
@@ -93,13 +93,13 @@ class FlightFilterUsageExampleTest {
         // В этом списке будут перелеты с датой и временем вылета позже текущей даты
         List<Flight> filtered1 = filter
                 .doFilter(new DeparturePredicate(Operator.GREATER_THAN, targetDateTime))
-                .get();
+                .getFiltered();
 
         // В этом списке будут перелеты, у которых дата и время вылета позже
         // текущей даты и количество промежуточных рейсов меньше 3
         List<Flight> filtered2 = filter
                 .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber).negate())
-                .get();
+                .getFiltered();
 
         System.out.println("Initial list:   " + flights);
         System.out.println("Filtered list1: " + filtered1);

@@ -29,7 +29,7 @@
 - создайте объект класса FlightFilter из пакета com.gridnine.testing.filter, в конструктор подайте
   исходный список перелетов
 - вызовите метод doFilter() класса FlightFilter, в качестве аргумента подайте комбинированный предикат
-- получите отфильтрованный список, вызвав метод get() класса FlightFilter
+- получите отфильтрованный список, вызвав метод getFiltered() класса FlightFilter
 
 #### Пример кода
 
@@ -50,7 +50,7 @@ AbstractPredicate<Flight> combinedPredicate = predicate1.and(predicate2.negate()
 
 // Создаем объект класса FlightFilter, вызываем метод doFilter() с комбинированным предикатом,
 // получаем отфильтрованный список
-List<Flight> filtered = new FlightFilter(flights).doFilter(combinedPredicate).get();
+List<Flight> filtered = new FlightFilter(flights).doFilter(combinedPredicate).getFiltered();
 ```
 
 Можно вызывать фильтры по цепочке, при этом предикаты будут комбинироваться по правилу "и".
@@ -64,7 +64,7 @@ long targetSegmentNumber = 3;
 List<Flight> filtered = new FlightFilter(flights)
         .doFilter(new DeparturePredicate(Operator.GREATER_THAN, targetDateTime))
         .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber).negate())
-        .get();
+        .getFiltered();
 ```
 
 Можно получать промежуточный результат работы фильтра
@@ -79,13 +79,13 @@ Filter<Flight> filter = new FlightFilter(flights);
 // В этом списке будут перелеты с датой и временем вылета позже текущей даты
 List<Flight> filtered1 = filter
         .doFilter(new DeparturePredicate(Operator.GREATER_THAN, targetDateTime))
-        .get();
+        .getFiltered();
 
 // В этом списке будут перелеты, у которых дата и время вылета позже
 // текущей даты и количество промежуточных рейсов меньше 3
 List<Flight> filtered2 = filter
         .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber).negate())
-        .get();
+        .getFiltered();
 ```
 
 ### Список предикатов

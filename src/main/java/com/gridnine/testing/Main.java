@@ -22,15 +22,15 @@ public class Main {
         LocalDateTime targetDateTime = LocalDateTime.now();
         AbstractPredicate<Flight> predicate1 = new DeparturePredicate(Operator.GREATER_THAN, targetDateTime);
         System.out.println("Flights with departure after " + targetDateTime + ":");
-        System.out.println(new FlightFilter(flights).doFilter(predicate1).get());
+        System.out.println(new FlightFilter(flights).doFilter(predicate1).getFiltered());
 
         AbstractPredicate<Flight> predicate2 = new ArrivalBeforeDeparturePredicate();
         System.out.println("Flights with arrival before departure:");
-        System.out.println(new FlightFilter(flights).doFilter(predicate2).get());
+        System.out.println(new FlightFilter(flights).doFilter(predicate2).getFiltered());
 
         long targetGroundMinutes = 120;
         AbstractPredicate<Flight> predicate3 = new GroundTimePredicate(Operator.GREATER_THAN, targetGroundMinutes);
         System.out.println("Flights with ground time greater then " + targetGroundMinutes + " minutes:");
-        System.out.println(new FlightFilter(flights).doFilter(predicate3).get());
+        System.out.println(new FlightFilter(flights).doFilter(predicate3).getFiltered());
     }
 }

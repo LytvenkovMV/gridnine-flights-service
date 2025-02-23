@@ -7,5 +7,5 @@ import java.util.List;
 public interface Filter<T> {
     Filter<T> doFilter(AbstractPredicate<T> predicate);
 
-    List<T> get();
+    List<T> getFiltered();
 }
