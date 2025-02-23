@@ -77,4 +77,42 @@ class AbstractPredicateTest {
 
         Assertions.assertThrows(NullPointerException.class, () -> alwaysFalsePredicate.or(null));
     }
+
+    @Test
+    void when_compareNums_then_return_true() {
+        AbstractPredicate<Flight> predicate = alwaysTruePredicate;
+
+        Assertions.assertTrue(predicate.compareNums(1, 1, Operator.EQUAL_TO));
+        Assertions.assertTrue(predicate.compareNums(2, 1, Operator.GREATER_THAN));
+        Assertions.assertTrue(predicate.compareNums(2, 1, Operator.GREATER_THAN_OR_EQUAL_TO));
+        Assertions.assertTrue(predicate.compareNums(1, 1, Operator.GREATER_THAN_OR_EQUAL_TO));
+        Assertions.assertTrue(predicate.compareNums(1, 2, Operator.LESS_THAN));
+        Assertions.assertTrue(predicate.compareNums(1, 2, Operator.LESS_THAN_OR_EQUAL_TO));
+        Assertions.assertTrue(predicate.compareNums(1, 1, Operator.LESS_THAN_OR_EQUAL_TO));
+
+        Assertions.assertTrue(predicate.compareNums(1.1, 1.1, Operator.EQUAL_TO));
+        Assertions.assertTrue(predicate.compareNums(1.2, 1.1, Operator.GREATER_THAN));
+        Assertions.assertTrue(predicate.compareNums(1.2, 1.1, Operator.GREATER_THAN_OR_EQUAL_TO));
+        Assertions.assertTrue(predicate.compareNums(1.1, 1.1, Operator.GREATER_THAN_OR_EQUAL_TO));
+        Assertions.assertTrue(predicate.compareNums(1.1, 1.2, Operator.LESS_THAN));
+        Assertions.assertTrue(predicate.compareNums(1.1, 1.2, Operator.LESS_THAN_OR_EQUAL_TO));
+        Assertions.assertTrue(predicate.compareNums(1.1, 1.1, Operator.LESS_THAN_OR_EQUAL_TO));
+    }
+
+    @Test
+    void when_compareNums_then_return_false() {
+        AbstractPredicate<Flight> predicate = alwaysTruePredicate;
+
+        Assertions.assertFalse(predicate.compareNums(1, 2, Operator.EQUAL_TO));
+        Assertions.assertFalse(predicate.compareNums(1, 2, Operator.GREATER_THAN));
+        Assertions.assertFalse(predicate.compareNums(1, 2, Operator.GREATER_THAN_OR_EQUAL_TO));
+        Assertions.assertFalse(predicate.compareNums(2, 1, Operator.LESS_THAN));
+        Assertions.assertFalse(predicate.compareNums(2, 1, Operator.LESS_THAN_OR_EQUAL_TO));
+
+        Assertions.assertFalse(predicate.compareNums(1.1, 1.2, Operator.EQUAL_TO));
+        Assertions.assertFalse(predicate.compareNums(1.1, 1.2, Operator.GREATER_THAN));
+        Assertions.assertFalse(predicate.compareNums(1.1, 1.2, Operator.GREATER_THAN_OR_EQUAL_TO));
+        Assertions.assertFalse(predicate.compareNums(1.2, 1.1, Operator.LESS_THAN));
+        Assertions.assertFalse(predicate.compareNums(1.2, 1.1, Operator.LESS_THAN_OR_EQUAL_TO));
+    }
 }

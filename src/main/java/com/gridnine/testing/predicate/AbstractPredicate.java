@@ -36,4 +36,44 @@ public abstract class AbstractPredicate<T> {
             }
         };
     }
+
+    protected boolean compareNums(long number1, long number2, Operator operator) {
+        switch (operator) {
+            case LESS_THAN -> {
+                return number1 < number2;
+            }
+            case GREATER_THAN -> {
+                return number1 > number2;
+            }
+            case LESS_THAN_OR_EQUAL_TO -> {
+                return number1 <= number2;
+            }
+            case GREATER_THAN_OR_EQUAL_TO -> {
+                return number1 >= number2;
+            }
+            default -> {
+                return number1 == number2;
+            }
+        }
+    }
+
+    public boolean compareNums(double number1, double number2, Operator operator) {
+        switch (operator) {
+            case LESS_THAN -> {
+                return number1 < number2;
+            }
+            case GREATER_THAN -> {
+                return number1 > number2;
+            }
+            case LESS_THAN_OR_EQUAL_TO -> {
+                return number1 <= number2;
+            }
+            case GREATER_THAN_OR_EQUAL_TO -> {
+                return number1 >= number2;
+            }
+            default -> {
+                return number1 == number2;
+            }
+        }
+    }
 }

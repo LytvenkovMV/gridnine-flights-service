@@ -4,9 +4,10 @@ import com.gridnine.testing.builder.FlightBuilder;
 import com.gridnine.testing.filter.impl.FlightFilter;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.AbstractPredicate;
+import com.gridnine.testing.predicate.Operator;
 import com.gridnine.testing.predicate.impl.ArrivalBeforeDeparturePredicate;
 import com.gridnine.testing.predicate.impl.DepartureAfterPredicate;
-import com.gridnine.testing.predicate.impl.GroundTimeExceedsPredicate;
+import com.gridnine.testing.predicate.impl.GroundTimePredicate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Main {
         System.out.println(new FlightFilter(flights).doFilter(predicate2).get());
 
         long targetGroundMinutes = 120;
-        AbstractPredicate<Flight> predicate3 = new GroundTimeExceedsPredicate(targetGroundMinutes);
+        AbstractPredicate<Flight> predicate3 = new GroundTimePredicate(Operator.GREATER_THAN, targetGroundMinutes);
         System.out.println("Flights with ground time greater then " + targetGroundMinutes + " minutes:");
         System.out.println(new FlightFilter(flights).doFilter(predicate3).get());
     }

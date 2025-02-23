@@ -3,6 +3,7 @@ package com.gridnine.testing.predicate.impl;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
 import com.gridnine.testing.predicate.AbstractPredicate;
+import com.gridnine.testing.predicate.Operator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-class GroundTimeExceedsPredicateTest {
+class GroundTimePredicateTest {
     Flight flight;
     long groundMinutes;
 
@@ -30,7 +31,7 @@ class GroundTimeExceedsPredicateTest {
     void when_ground_minutes_greater_than_target_then_return_true() {
         long targetMinutes = groundMinutes - 20;
 
-        AbstractPredicate<Flight> predicate = new GroundTimeExceedsPredicate(targetMinutes);
+        AbstractPredicate<Flight> predicate = new GroundTimePredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetMinutes);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -39,16 +40,16 @@ class GroundTimeExceedsPredicateTest {
     void when_ground_minutes_equals_target_then_return_true() {
         long targetMinutes = groundMinutes;
 
-        AbstractPredicate<Flight> predicate = new GroundTimeExceedsPredicate(targetMinutes);
+        AbstractPredicate<Flight> predicate = new GroundTimePredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetMinutes);
 
-        Assertions.assertFalse(predicate.test(flight));
+        Assertions.assertTrue(predicate.test(flight));
     }
 
     @Test
     void when_ground_minutes_less_than_target_then_return_false() {
         long targetMinutes = groundMinutes + 20;
 
-        AbstractPredicate<Flight> predicate = new GroundTimeExceedsPredicate(targetMinutes);
+        AbstractPredicate<Flight> predicate = new GroundTimePredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetMinutes);
 
         Assertions.assertFalse(predicate.test(flight));
     }

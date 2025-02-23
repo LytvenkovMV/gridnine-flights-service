@@ -3,6 +3,7 @@ package com.gridnine.testing.predicate.impl;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
 import com.gridnine.testing.predicate.AbstractPredicate;
+import com.gridnine.testing.predicate.Operator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-class SegmentNumberGreaterOrEqualsPredicateTest {
+class SegmentNumberPredicateTest {
     Flight flight;
 
     @BeforeEach
@@ -26,7 +27,7 @@ class SegmentNumberGreaterOrEqualsPredicateTest {
     void when_actual_segment_number_greater_than_target_then_return_true() {
         long targetSegmentNumber = 1L;
 
-        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -35,7 +36,7 @@ class SegmentNumberGreaterOrEqualsPredicateTest {
     void when_actual_segment_number_equals_target_then_return_true() {
         long targetSegmentNumber = 2L;
 
-        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber);
 
         Assertions.assertTrue(predicate.test(flight));
     }
@@ -44,7 +45,7 @@ class SegmentNumberGreaterOrEqualsPredicateTest {
     void when_actual_segment_number_less_than_target_then_return_false() {
         long targetSegmentNumber = 3L;
 
-        AbstractPredicate<Flight> predicate = new SegmentNumberGreaterOrEqualsPredicate(targetSegmentNumber);
+        AbstractPredicate<Flight> predicate = new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber);
 
         Assertions.assertFalse(predicate.test(flight));
     }

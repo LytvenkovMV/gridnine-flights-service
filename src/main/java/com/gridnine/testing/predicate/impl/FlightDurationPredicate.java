@@ -3,15 +3,18 @@ package com.gridnine.testing.predicate.impl;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
 import com.gridnine.testing.predicate.AbstractPredicate;
+import com.gridnine.testing.predicate.Operator;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class FlightDurationExceedsPredicate extends AbstractPredicate<Flight> {
+public class FlightDurationPredicate extends AbstractPredicate<Flight> {
+    private final Operator operator;
     private final long targetMinutes;
 
-    public FlightDurationExceedsPredicate(long targetMinutes) {
+    public FlightDurationPredicate(Operator operator, long targetMinutes) {
+        this.operator = operator;
         this.targetMinutes = targetMinutes;
     }
 
@@ -31,6 +34,6 @@ public class FlightDurationExceedsPredicate extends AbstractPredicate<Flight> {
 
         long duration = Duration.between(departure, arrival).toMinutes();
 
-        return duration > targetMinutes;
+        return compareNums(duration, targetMinutes, operator);
     }
 }
