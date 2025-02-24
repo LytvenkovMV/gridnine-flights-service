@@ -61,7 +61,7 @@ AbstractPredicate<Flight> combinedPredicate = predicate1.and(invPredicate2).and(
 List<Flight> filtered = new FlightFilter(flights).doFilter(combinedPredicate).getFiltered();
 ```
 
-Можно вызывать методы филтрации последовательно, при этом предикаты будут комбинироваться по правилу "и".
+Можно вызывать методы фильтрации последовательно, при этом предикаты будут комбинироваться по правилу "и".
 В этом случае код значительно сокращается
 
 ```java
@@ -109,7 +109,7 @@ List<Flight> filtered2 = filter
   *Параметры конструктора:* startDateTime:LocalDateTime - начало диапазона,
   endDateTime:LocalDateTime - конец диапазона
 - **FlightDurationPredicate:** возвращает перелеты у которых общее время в пути
-  больше, меньше или равно заданному в зависимости от оператора
+  больше, меньше или равно заданному в зависимости от оператора  
   *Параметры конструктора:* operator:Operator - оператор, по которому происходит сравнение,
   targetMinutes:long - заданное время в минутах
 - **GroundTimePredicate:** возвращает перелеты у которых общее время, проведенное на
