@@ -1,4 +1,4 @@
-package com.gridnine.testing.predicate;
+package com.gridnine.testing.predicate.util;
 
 public enum Operator {
     EQUAL_TO,

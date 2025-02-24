@@ -2,7 +2,8 @@ package com.gridnine.testing.predicate.impl;
 
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.AbstractPredicate;
-import com.gridnine.testing.predicate.Operator;
+import com.gridnine.testing.predicate.util.Comparator;
+import com.gridnine.testing.predicate.util.Operator;
 
 public class SegmentNumberPredicate extends AbstractPredicate<Flight> {
     private final Operator operator;
@@ -17,6 +18,6 @@ public class SegmentNumberPredicate extends AbstractPredicate<Flight> {
     public boolean test(Flight flight) {
         long segmentNumber = flight.getSegments().size();
 
-        return compareNums(segmentNumber, targetSegmentNumber, operator);
+        return Comparator.compareNums(segmentNumber, targetSegmentNumber, operator);
     }
 }

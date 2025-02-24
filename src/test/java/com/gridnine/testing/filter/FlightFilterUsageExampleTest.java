@@ -4,7 +4,7 @@ import com.gridnine.testing.builder.FlightBuilder;
 import com.gridnine.testing.filter.impl.FlightFilter;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.predicate.AbstractPredicate;
-import com.gridnine.testing.predicate.Operator;
+import com.gridnine.testing.predicate.util.Operator;
 import com.gridnine.testing.predicate.impl.DeparturePredicate;
 import com.gridnine.testing.predicate.impl.SegmentNumberPredicate;
 import org.junit.jupiter.api.BeforeEach;

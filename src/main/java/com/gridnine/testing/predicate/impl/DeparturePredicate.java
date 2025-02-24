@@ -3,7 +3,8 @@ package com.gridnine.testing.predicate.impl;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
 import com.gridnine.testing.predicate.AbstractPredicate;
-import com.gridnine.testing.predicate.Operator;
+import com.gridnine.testing.predicate.util.Comparator;
+import com.gridnine.testing.predicate.util.Operator;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -24,6 +25,6 @@ public class DeparturePredicate extends AbstractPredicate<Flight> {
                 .map(Segment::getDepartureDate)
                 .min(LocalDateTime::compareTo)
                 .orElse(LocalDateTime.MIN);
-        return compareDates(minDepartureDateTime, targetDateTime, operator);
+        return Comparator.compareDates(minDepartureDateTime, targetDateTime, operator);
     }
 }
