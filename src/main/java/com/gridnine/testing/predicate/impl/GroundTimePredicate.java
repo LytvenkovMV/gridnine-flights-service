@@ -30,6 +30,6 @@ public class GroundTimePredicate extends AbstractPredicate<Flight> {
             Duration duration = Duration.between(lastArrivalDate, nextDepartureDate);
             groundMinutes += duration.toMinutes();
         }
-        return Comparator.compareNums(groundMinutes, targetMinutes, operator);
+        return Comparator.compare(groundMinutes, targetMinutes, operator);
     }
 }

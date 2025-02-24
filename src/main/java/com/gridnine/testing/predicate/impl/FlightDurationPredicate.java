@@ -35,6 +35,6 @@ public class FlightDurationPredicate extends AbstractPredicate<Flight> {
 
         long duration = Duration.between(departure, arrival).toMinutes();
 
-        return Comparator.compareNums(duration, targetMinutes, operator);
+        return Comparator.compare(duration, targetMinutes, operator);
     }
 }

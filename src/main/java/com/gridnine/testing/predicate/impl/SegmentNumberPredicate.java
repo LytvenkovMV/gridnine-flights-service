@@ -18,6 +18,6 @@ public class SegmentNumberPredicate extends AbstractPredicate<Flight> {
     public boolean test(Flight flight) {
         long segmentNumber = flight.getSegments().size();
 
-        return Comparator.compareNums(segmentNumber, targetSegmentNumber, operator);
+        return Comparator.compare(segmentNumber, targetSegmentNumber, operator);
     }
 }

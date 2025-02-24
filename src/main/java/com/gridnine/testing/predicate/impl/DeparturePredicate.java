@@ -25,6 +25,6 @@ public class DeparturePredicate extends AbstractPredicate<Flight> {
                 .map(Segment::getDepartureDate)
                 .min(LocalDateTime::compareTo)
                 .orElse(LocalDateTime.MIN);
-        return Comparator.compareDates(minDepartureDateTime, targetDateTime, operator);
+        return Comparator.compare(minDepartureDateTime, targetDateTime, operator);
     }
 }

@@ -3,7 +3,7 @@ package com.gridnine.testing.predicate.util;
 import java.time.LocalDateTime;
 
 public class Comparator {
-    public static boolean compareNums(long number1, long number2, Operator operator) {
+    public static boolean compare(long number1, long number2, Operator operator) {
         switch (operator) {
             case LESS_THAN -> {
                 return number1 < number2;
@@ -23,7 +23,7 @@ public class Comparator {
         }
     }
 
-    public static boolean compareNums(double number1, double number2, Operator operator) {
+    public static boolean compare(double number1, double number2, Operator operator) {
         switch (operator) {
             case LESS_THAN -> {
                 return number1 < number2;
@@ -43,7 +43,7 @@ public class Comparator {
         }
     }
 
-    public static boolean compareDates(LocalDateTime dateTime1, LocalDateTime dateTime2, Operator operator) {
+    public static boolean compare(LocalDateTime dateTime1, LocalDateTime dateTime2, Operator operator) {
         switch (operator) {
             case LESS_THAN -> {
                 return dateTime1.isBefore(dateTime2);

@@ -25,6 +25,6 @@ public class ArrivalPredicate extends AbstractPredicate<Flight> {
                 .map(Segment::getArrivalDate)
                 .max(LocalDateTime::compareTo)
                 .orElse(LocalDateTime.MAX);
-        return Comparator.compareDates(maxArrivalDateTime, targetDateTime, operator);
+        return Comparator.compare(maxArrivalDateTime, targetDateTime, operator);
     }
 }
