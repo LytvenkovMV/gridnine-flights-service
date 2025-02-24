@@ -44,26 +44,32 @@ AbstractPredicate<Flight> predicate1 = new DeparturePredicate(Operator.GREATER_T
 long targetSegmentNumber = 3;
 AbstractPredicate<Flight> predicate2 = new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber);
 
+// Делаем инверсию второго предиката
+AbstractPredicate<Flight> invPredicate2 = predicate2.negate();
+
+// Создаем предикат, пропускающий только те перелеты, у которых общее время в пути меньше 6 часов
+long targetFlightMinutes = 360;
+AbstractPredicate<Flight> predicate3 = new FlightDurationPredicate(Operator.LESS_THAN, targetFlightMinutes);
+
 // Создаем комбинированый предикат, пропускающий только те перелеты, у которых дата и время
-// вылета позже текущей даты и количество промежуточных рейсов меньше 3
-AbstractPredicate<Flight> combinedPredicate = predicate1.and(predicate2.negate());
+// вылета позже текущей даты, количество промежуточных рейсов меньше 3 и общее время в пути
+// меньше 6 часов
+AbstractPredicate<Flight> combinedPredicate = predicate1.and(invPredicate2).and(predicate3);
 
 // Создаем объект класса FlightFilter, вызываем метод doFilter() с комбинированным предикатом,
 // получаем отфильтрованный список
 List<Flight> filtered = new FlightFilter(flights).doFilter(combinedPredicate).getFiltered();
 ```
 
-Можно вызывать фильтры по цепочке, при этом предикаты будут комбинироваться по правилу "и".
+Можно вызывать методы филтрации последовательно, при этом предикаты будут комбинироваться по правилу "и".
 В этом случае код значительно сокращается
 
 ```java
 // Сокращенная запись предыдущего кода
-LocalDateTime targetDateTime = LocalDateTime.now();
-long targetSegmentNumber = 3;
-
 List<Flight> filtered = new FlightFilter(flights)
-        .doFilter(new DeparturePredicate(Operator.GREATER_THAN, targetDateTime))
-        .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber).negate())
+        .doFilter(new DeparturePredicate(Operator.GREATER_THAN, LocalDateTime.now()))
+        .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, 3).negate())
+        .doFilter(new FlightDurationPredicate(Operator.LESS_THAN, 360))
         .getFiltered();
 ```
 
@@ -71,20 +77,17 @@ List<Flight> filtered = new FlightFilter(flights)
 
 ```java
 // Получение промежуточного результата
-LocalDateTime targetDateTime = LocalDateTime.now();
-long targetSegmentNumber = 3;
-
 Filter<Flight> filter = new FlightFilter(flights);
 
 // В этом списке будут перелеты с датой и временем вылета позже текущей даты
 List<Flight> filtered1 = filter
-        .doFilter(new DeparturePredicate(Operator.GREATER_THAN, targetDateTime))
+        .doFilter(new DeparturePredicate(Operator.GREATER_THAN, LocalDateTime.now()))
         .getFiltered();
 
 // В этом списке будут перелеты, у которых дата и время вылета позже
 // текущей даты и количество промежуточных рейсов меньше 3
 List<Flight> filtered2 = filter
-        .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, targetSegmentNumber).negate())
+        .doFilter(new SegmentNumberPredicate(Operator.GREATER_THAN_OR_EQUAL_TO, 3).negate())
         .getFiltered();
 ```
 
